@@ -1,0 +1,67 @@
+***Settings***
+Documentation This suite contains simple Tests for wwww.tracktion.com for postcast demo
+Library     Selenium2Library
+Library     BuiltIn
+Library     MyLibrary.py
+Test Teardown   Close All Browsers
+
+***Variables***
+# Constants
+${BROWSER}  chrome
+
+# Test variables
+${testURL}  http://wwww.tracktion.com
+${homeButtton}  menu-item-85
+${homePageTitle}    Tracktion Music Production Software | single screen
+${accountButton}    menu-item-89
+${accountPageTitle} Please  login | Trackion Software
+${blogButon}    menu-item-87
+${blogPageTitle} Blog * Tracktion
+${supportButton}    menu-item-88
+${supportPageTitle} Support * Tracktion
+
+*** Test Cases ***
+Verify Tracktion Site Landing Page Title
+    [Documentation]     Just a quiuck title check
+    [Tags]      SM0KE01
+    Open Tracktion Page
+    Verify Title Text       ${homePageTitle}
+
+Verify Tracktion Site Title On All Primary Pages
+    [Documentation]     Let's go deeper and check more titles
+    [Tags]      SMOKE02
+    Open Tracktion Page
+    Click Element   ${accountButton}
+    Verify Title Text   ${accountPageTitle}
+    Click Element   ${blogButton}
+    Verify Title Text     ${blogPageTitle}
+    Click Element       ${supportButton}
+    Verify Title Text   ${supportPageTitle}
+    Click Element      ${homeButton}
+    Verify Title Text   ${homePageTitle}
+    Get Current Browser
+
+
+*** Keywords ***
+Open Tracktion Page
+    Open Browser    ${testURL}  ${BROWSER}
+
+Verify Title Text
+    [Arguments]  ${text}
+    ${titleFromPage}=   Get Title Via Python
+    Should Contain  ${titleFromPage}    ${text}
+    Log Many    Chcking to see if   ${titleFromPage}    contains    ${text}
+
+Verify Windows Size
+    [Arguments] ${desiredSize}
+    ${windowSize}=  Get My Window Size
+
+
+
+
+
+
+
+
+
+
